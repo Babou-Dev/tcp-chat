@@ -14,9 +14,9 @@ def receive():
         try:
             # Recevoir un message du serveur
             # si 'NICK' envoyer le pseudo
-            message = client.recv(1024).decode('ascii')
+            message = client.recv(1024).decode('utf-8')
             if message == 'NICK':
-                client.send(nickname.encode('ascii'))
+                client.send(nickname.encode('utf-8'))
             else:
                 print(message)
         except:
@@ -29,7 +29,7 @@ def receive():
 def write():
     while True:
         message = '{}: {}'.format(nickname, input(''))
-        client.send(message.encode('ascii'))
+        client.send(message.encode('utf-8'))
 
 # Start les Thread pour écouter et envoyer sur le serveur
 receive_thread = threading.Thread(target=receive)

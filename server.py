@@ -32,7 +32,7 @@ def handle(client):
             clients.remove(client)
             client.close()
             nickname = nicknames[index]
-            broadcast('{} a quitté !'.format(nickname).encode('ascii'))
+            broadcast('{} a quitté !'.format(nickname).encode('utf-8'))
             nicknames.remove(nickname)
             break
 
@@ -44,15 +44,15 @@ def receive():
         print("Connecté avec {}".format(str(address)))
 
         # demande et stockage du pseudo
-        client.send('NICK'.encode('ascii'))
-        nickname = client.recv(1024).decode('ascii')
+        client.send('NICK'.encode('utf-8'))
+        nickname = client.recv(1024).decode('utf-8')
         nicknames.append(nickname)
         clients.append(client)
 
         # afficher et envoyer le pseudo
         print("Votre Pseudo est {}".format(nickname))
-        broadcast("{} à rejoint le chat!".format(nickname).encode('ascii'))
-        client.send('Connecté au chat!'.encode('ascii'))
+        broadcast("{} à rejoint le chat!".format(nickname).encode('utf-8'))
+        client.send('Connecté au chat!'.encode('utf-8'))
 
         # Commence les threads
         thread = threading.Thread(target=handle, args=(client,))
